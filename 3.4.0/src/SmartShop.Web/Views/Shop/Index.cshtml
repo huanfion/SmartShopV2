@@ -1,0 +1,94 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_ShopLayout.cshtml";
+}
+@model List<ShopProduct>
+
+<div class="banner">
+    <div class="swiper-container swiper1">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-image:url(/content/shop/images/banner01.jpg)"></div>
+            <div class="swiper-slide" style="background-image:url(/content/shop/images/banner02.jpg)"></div>
+            <div class="swiper-slide" style="background-image:url(/content/shop/images/banner03.jpg)"></div>
+        </div>
+        <div class="swiper-pagination swiper-pagination-coffee"></div>
+    </div>
+</div>
+
+<div class="recommend">
+    <div class="title"><span>精品推荐</span></div>
+    <div class="recommend-box">
+        <div class="swiper-container control-slide swiper2">
+            <div class="swiper-wrapper">
+                @foreach (var item in Model)
+                {
+                    <div class="swiper-slide">
+                        <div class="pro" data-itemid="@item.Id">
+                            <div class="cover"><img src="@item.Cover" /></div>
+                            <div class="intro">
+                                <div class="pro-name">@item.Name</div>
+                                <div class="pro-price"><span>¥</span>@item.Price</div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="classmenu">
+    <div class="title"><span>主打系列</span></div>
+    <div class="classmenu-box">
+        <ul>
+            <li><a href="/shop/product?cid=4"><img src="/content/shop/images/ban1.jpg" /></a></li>
+            <li><a href="/shop/product?cid=5"><img src="/content/shop/images/ban2.png" /></a></li>
+            <li><a href="/shop/product?cid=6"><img src="/content/shop/images/ban3.png" /></a></li>
+
+        </ul>
+    </div>
+</div>
+<div class="footer">
+    <div class="copyright"><span></span></div>
+</div>
+<div class="space1"></div>
+
+
+@section Scripts {
+    <script src="~/Scripts/swiper/swiper.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            getcart();
+
+            var swiper = new Swiper('.swiper1', {
+                autoplay: 5000,
+                pagination: '.swiper-pagination',
+                paginationClickable: '.swiper-pagination',
+                spaceBetween: 30,
+                effect: 'slide'
+            });
+            var swiper = new Swiper('.swiper2', {
+                slidesPerView: 3,
+                spaceBetween: 5,
+                slidesOffsetBefore: 5,
+                slidesOffsetAfter: 5,
+                scrollbarHide: false,
+                scrollbarDraggable: true,
+                scrollbarSnapOnRelease: true,
+            });
+
+            $('.pro').click(function () {
+                location.href = '/shop/product?id=' + $(this).data('itemid');
+            });
+
+
+        });
+    </script>
+}
+@section styles {
+    <link href="~/Scripts/swiper/swiper.css" rel="stylesheet" />
+}
+

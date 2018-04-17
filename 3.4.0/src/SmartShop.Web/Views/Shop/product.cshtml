@@ -1,0 +1,99 @@
+﻿@model ShopProduct
+@{
+    ViewBag.Title = "products";
+    Layout = "~/Views/Shared/_ShopLayout.cshtml";
+}
+
+<div class="product">
+    <div class="cover"><img src="@Model.Cover" /></div>
+    <div class="pvBox">
+        <div class="pv-info">
+            <div class="pv-title">@Model.Name</div>
+            <div class="clear"></div>
+        </div>
+        <div class="pv-prices">￥ <strong>@Model.Price</strong>元</div>
+        <div class="pay">
+            <a href="#" id="cc">添加到购物车</a>
+
+            <input type="hidden" id="ID" name="ID" value="@Model.Id" />
+        </div>
+    </div>
+
+</div>
+
+<div style="height:0.5rem;"></div>
+<div class="footer">
+    <div class="copyright"><span></span></div>
+</div>
+
+<div class="sumboxmodel">
+    <div class="sumboxbg"></div>
+    <div class="sumbox">
+        <div class="closesumbox">X</div>
+        <div class="title">请选择数量</div>
+        <div class="itemsum">
+            <span class="minus">-</span>
+            <span class="sum">1</span>
+            <span class="plus">+</span>
+        </div>
+        <div class="sumboxaction">
+            <button type="button" id="buSubmit" name="buSubmit" value="确定">确定</button>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+         getcart();
+
+            $('#cc').click(function () {
+                $('.sumboxmodel').show();
+            });
+            $('.sumboxbg').click(function () {
+                $('.sumboxmodel').hide();
+            });
+            $('.closesumbox').click(function () {
+                $('.sumboxmodel').hide();
+            });
+
+            $('.itemsum span').click(function () {
+                var valEl = $(this).siblings('.sum');
+                var _value = parseInt(valEl.text());
+                var v = $(this).text();
+                if (v == '-') {
+                    if (_value > 1) {
+                        _value--;
+                        valEl.text(_value);
+                    }
+                }
+                else if (v == '+') {
+                    _value++
+                    valEl.text(_value);
+                }
+            });
+
+
+         $('#buSubmit').click(function () {
+                var _sum = parseInt($('.itemsum .sum').text());
+                var _pid = parseInt($('#ID').val());
+                $.post("/Shop/AddCart", { productId: _pid, sum: _sum }, function (result) {
+                    var el = $('.navmenu i');
+                    if (result > 0) {
+                        el.text(result);
+                        el.show();
+
+                        webToast("商品已添加到购物车！");
+                    }
+                    else {
+                        el.hide();
+                    }
+                    $('.sumboxmodel').hide();
+                }, 'json');
+            });
+
+        });
+
+    </script>
+}

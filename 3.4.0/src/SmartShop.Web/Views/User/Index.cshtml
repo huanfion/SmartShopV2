@@ -1,0 +1,155 @@
+﻿@model HTUser
+@{
+    ViewBag.Title = "用户中心";
+    Layout = "~/Views/Shared/_ShopLayout.cshtml";
+    int s1 = ViewBag.OrderSataus1;
+    int s2 = ViewBag.OrderSataus2;
+    int s3 = ViewBag.OrderSataus3;
+}
+
+
+<div class="member">
+    <div id="container">
+        <div id="anitOut">
+        </div>
+    </div>
+    <div class="detail">
+        <div class="head">
+            <div class="head-box">
+                @if (string.IsNullOrEmpty(Model.Avatar))
+                {
+                    <img src="~/Content/home/images/ico-avatar.png" />
+                }
+                else
+                {
+                    <img src="@Model.Avatar" />
+                }
+            </div>
+        </div>
+        <div class="advanced">
+            <a href="#"></a>
+        </div>
+        <div class="summary">
+            <div class="nickname">@Model.NickName</div>
+            <div class="phone">@Model.Mobile</div>
+        </div>
+    </div>
+    <div class="service">
+        <div class="group">
+            <ul>
+                <li>
+                    <a href="/user/order?status=1">
+                        <i class="ico-order-1">
+                        </i>待付款
+                        @if (s1 > 0)
+                        {
+                            <span>@s1</span>
+                        }
+                    </a>
+                </li>
+                <li>
+                    <a href="/user/order?status=2">
+                        <i class="ico-order-2">
+                        </i>待送达
+                        @if (s2 > 0)
+                        {
+                            <span>@s2</span>
+                        }
+                    </a>
+                </li>
+                <li>
+                    <a href="/user/order?status=3">
+                        <i class="ico-order-3"></i>已完成
+                        @if (s3 > 0)
+                        {
+                            <span>@s3</span>
+                        }
+                    </a>
+                </li>
+                <li>
+                    <a href="/user/order">
+                        <i class="ico-order-4"></i>我的订单
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="memberRecommend">
+        <div class="title"></div>
+        <div class="recommend-box">
+            @foreach (var item in List)
+            {
+                <div class="pro" data-itemid="@item.ID">
+                    <div class="cover"><img src="@item.Cover" /></div>
+                    <div class="intro">
+                        <div class="pro-name">@item.Name</div>
+                        <div class="pro-price"><span>¥</span>@item.Price</div>
+                    </div>
+                </div>
+            }
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    <div class="service">
+
+        <div class="btngroup">
+            <a href="/user/logout">退出登录</a>
+        </div>
+    </div>
+
+    <div style="display: none;">
+        <input type="file" accept="image/*" id="fHead" name="fHead">
+        <input type="hidden" id="tbID" name="tbID" value="@Model.ID" />
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+
+        $(document).ready(function () {
+            getcart();
+
+            $(".detail").click(function () {
+                //top.location.href = "/user/userinfo";
+            });
+
+
+            $('.pro').click(function () {
+                location.href = '/home/product?id=' + $(this).data('itemid');
+            });
+
+
+            $(".head").click(function () {
+                $("#fHead").click();
+            });
+
+            $("#fHead").change(function () {
+                var v = $(this).val();
+                var reader = new FileReader();
+                reader.readAsDataURL(this.files[0]);
+                reader.onload = function (e) {
+
+                    webToast("头像上传中.");
+                    $.ajax({
+                        type: "post",
+                        url: "/user/UpdateUserHead",
+                        async: false,
+                        data: { id: $("#tbID").val(), base64Head: this.result },
+                        dataType: "json",
+                        success: function (result) {
+                            if (result) {
+                                if (result.result == 1) {
+                                    $(".head-box img").attr("src", result.msg);
+                                    webToast("头像上传成功.");
+                                }
+                            }
+                        }
+                    });
+                };
+            });
+        });
+    </script>
+}

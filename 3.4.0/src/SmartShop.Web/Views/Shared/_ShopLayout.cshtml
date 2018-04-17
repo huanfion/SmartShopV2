@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewBag.Title</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="~/Content/shop/css/style.css?v=1" />
+    <link href="~/css/alertPopShow.css" rel="stylesheet" />
+    @RenderSection("styles", required: false)
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/alertPopShow.js"></script>
+    <script src="~/Scripts/custom.js"></script>
+    <script>
+    var win_width = window.innerWidth || document.documentElement.clientWidth;
+    win_width = win_width > 750 ? 750 : win_width;
+    document.documentElement.style.fontSize = (win_width / 750) * 100 + 'px';
+    </script>
+</head>
+<body>
+    <div class="viewport">
+        @RenderBody()
+        <div class="footbar">
+            <div class="navmenu">
+                <ul>
+                    <li class="active"><a href="/"><span class="ico ico-home"></span>首页</a></li>
+                    <li><a href="/shop/products"><span class="ico ico-class"></span>分类</a></li>
+                    <li><a href="/user/cart"><span class="ico ico-cart"></span>购物车<i></i></a></li>
+                    <li><a href="/user/index"><span class="ico ico-user"></span>我的</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function (doc, win) {
+            psdW = 750;
+            docEl = doc.documentElement;
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+            recalc = function () {
+                docW = docEl.clientWidth;
+                docH = docEl.clientHeight;
+                nowR = docW / psdW > 1 ? 1 : docW / psdW;
+                docEl.style.fontSize = nowR * 100 + 'px';
+            };
+            if (!doc.addEventListener) {
+                return;
+            }
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

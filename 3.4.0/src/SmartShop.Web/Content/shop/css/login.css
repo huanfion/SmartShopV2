@@ -1,0 +1,176 @@
+form,input,div{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    margin:0;
+    padding:0;
+		background-color:#f6f6f6;
+}
+header {
+		background-color:#fff;
+		height:0.8rem;
+		padding-left:0.3rem;
+		margin-bottom:0.2rem;
+		border-bottom:solid 1px #dedede;
+}
+header h1{
+    line-height:0.8rem;
+    font-size: 0.3rem;
+    color: #630;
+		margin:0px;
+}
+
+.main{
+    width:100%;
+		background-color:#fff;
+    position: relative;
+		border-top:solid 1px #dedede;
+		border-bottom:solid 1px #dedede;
+		padding-bottom:0.5rem;
+}
+.main form .inputBig{
+    width:6.51rem;
+    height:3.12rem;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+.main form .inputBig div:nth-of-type(1){
+    margin-top:0.6rem;
+}
+.main form .inputBig div{
+    width: 5.77rem;
+    height: 0.89rem;
+    margin:0.3rem auto;
+}
+.main form .inputBig div input{
+    float: left;
+    width: 5.77rem;
+    height: 0.85rem;
+    border:none;
+    border: 0.02rem solid #630;
+    padding-left:1.3rem;
+    line-height:0.85rem;
+    font-size: 0.32rem;
+    color: #630;
+}
+input::-webkit-input-placeholder{
+    color: #630;opacity:0.6;
+}
+.main form .inputBig div:nth-of-type(1) input{
+    background: url("../images/user.png") no-repeat 0.2rem center;
+    background-size:8%;
+}
+.main form .inputBig div:nth-of-type(2) input{
+    background: url("../images/Shape.png") no-repeat 0.2rem center;
+    background-size:7%;
+}
+@keyframes huxi {
+    0%{box-shadow: 0px 0px 0px #630}
+    50%{box-shadow: 0px 0px 0.3rem #630}
+    100%{box-shadow: 0px 0px 0px #630}
+}
+.main form .inputBig div:nth-of-type(1)::before{
+    content:'';
+    height:0.41rem;
+    width: 0.02rem;
+    background-color: #630;
+    position: absolute;
+    left:1.4rem;
+    top:27%;
+}
+.main form .inputBig div:nth-of-type(2)::before{
+    content:'';
+    height:0.41rem;
+    width: 0.02rem;
+    background-color: #630;
+    position: absolute;
+    left:1.4rem;
+    top:65%;
+}
+
+.main form div.inputBig input:focus{
+    /*outline: #00B4FF auto 0.05rem;*/
+    border: 1px solid #630;
+    animation: huxi 3s ease-in infinite reverse;
+}
+.msgbox {
+    width:6rem;
+    margin:auto;
+}
+.msgbox label {
+    display:block;
+}
+.msgbox label.error {
+	font-size: 0.3rem;
+	color: #990000;
+}
+/*.main button{
+    
+}*/
+.btn{
+    display:block;
+    outline:none;
+    width: 5.77rem;
+    height: 0.82rem;
+    margin:0.1rem auto 0;
+    background: #630;
+		border:none;
+    border-radius: 0.05rem;
+    font-size: 0.32rem;
+    color: #FFFFFF;
+    letter-spacing: 0.1rem;
+}
+
+.btn2{
+    position: absolute;
+    top:1.8rem;
+    right:0.39rem;
+    width: 2.2rem;
+    height: 0.83rem;
+		border:none;
+    background: #630;
+    opacity:1;
+    font-size: 0.32rem;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 0;
+
+}
+.btn2.tag {
+    font-size: 0.22rem;
+    background:#ff6a00;
+}
+
+.footer {
+	text-align:center;
+	height: 0.8rem;
+    position:absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+.footer .copyright {
+	color:#630;
+	font-size: 0.3rem;
+}
+.footer .copyright span {
+	display:inline-block;
+	width: 1rem;
+	height: 0.4rem;
+	position:relative;
+	top:0.1rem;
+	background-image: url(/Content/home/images/114logo.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size:contain;
+}
+.error {
+    display:block;
+    line-height:0.35rem;
+    font-size:0.25rem;
+    color:#f00;
+    clear:both;
+}
