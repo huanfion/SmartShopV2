@@ -210,12 +210,16 @@
     <Compile Include="PhoneValidApp\PhoneValidService.cs" />
     <Compile Include="ShopCartApp\IShopCartAppService.cs" />
     <Compile Include="ShopCartApp\ShopCartAppService.cs" />
+    <Compile Include="ShopOrderApp\IShopOrderService.cs" />
+    <Compile Include="ShopOrderApp\ShopOrderService.cs" />
     <Compile Include="ShopProductApp\Dto\ShopProductDto.cs" />
     <Compile Include="ShopProductApp\IShopProductAppservice.cs" />
     <Compile Include="ShopProductApp\ShopProductAppService.cs" />
     <Compile Include="SmartShopApplicationModule.cs" />
     <Compile Include="SmartShopAppServiceBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserApp\IUserService.cs" />
+    <Compile Include="UserApp\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

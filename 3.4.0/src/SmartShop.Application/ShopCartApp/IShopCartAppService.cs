@@ -36,5 +36,37 @@ namespace SmartShop.ShopCartApp
         /// <param name="productId"></param>
         /// <returns></returns>
         ShopCart GetCartByProductId(string tag, int productId);
+        /// <summary>
+        /// 更新购物车
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <param name="userid"></param>
+        void BindCart(string tag, int userid);
+        /// <summary>
+        /// 新增一条购物车记录
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <returns></returns>
+        int InsertCart(ShopCart cart);
+
+        /// <summary>
+        /// 更新购物车记录
+        /// </summary>
+        /// <param name="cart"></param>
+        void UpdateCart(ShopCart cart);
+
+        /// <summary>
+        /// 根据用户id查找购物车列表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+         List<ShopCart> GetCartListByMemberId(int id);
+
+        /// <summary>
+        /// 根据tag查找购物车列表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        List<ShopCart> GetCartListByTag(string tag);
     }
 }

@@ -6,7 +6,7 @@ namespace SmartShop.Web.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return Content("") ;
         }
 	}
 }

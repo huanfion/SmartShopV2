@@ -15,7 +15,7 @@ namespace SmartShop.Common
      /// <param name="phone">手机号码,多个号码用";"分隔</param>
      /// <param name="msg">信息内容</param>
      /// <returns></returns>
-        public bool Send(string phone, string msg)
+        public static bool Send(string phone, string msg)
         {
             string url = string.Format("http://113.106.16.55:8080/GateWay/Services.asmx/DirectSend?UserID={0}&Account={1}&Password={2}&Phones={3};&Content={4}&SendTime=&SendType=1&PostFixNumber=",
                 "969293", "admin", "4MSCFX", phone, msg);
@@ -42,7 +42,7 @@ namespace SmartShop.Common
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public SmsResult Send(Entities.SmsContext context)
+        public static SmsResult Send(Entities.SmsContext context)
         {
             string url = "http://client.sms10000.com/api/webservice";
             url += ("?" + context.ToString());
@@ -68,7 +68,7 @@ namespace SmartShop.Common
 
         }
 
-        public SmsResult SendRegisterResult(string phone, string msg)
+        public static SmsResult SendRegisterResult(string phone, string msg)
         {
             SmsContext context = new SmsContext();
             context.MsgId = 1;

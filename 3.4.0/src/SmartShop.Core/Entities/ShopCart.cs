@@ -10,7 +10,7 @@ namespace SmartShop.Core.Entities{
         /// <summary>
         /// ShopId
         /// </summary>
-        public virtual int? ShopId
+        public virtual int ShopId
         {
             get; 
             set; 
@@ -20,57 +20,57 @@ namespace SmartShop.Core.Entities{
         /// <summary>
         /// ProductId
         /// </summary>
-        public virtual int? ProductId
+        public virtual int ProductId
         {
             get; 
             set; 
-        } 
-         
-           
+        }
+
+
         /// <summary>
         /// ProductName
         /// </summary>
         public virtual string ProductName
         {
-            get; 
-            set; 
-        } 
-         
-           
+            get;
+            set;
+        } = string.Empty;
+
+
         /// <summary>
         /// ProductPic
         /// </summary>
         public virtual string ProductPic
         {
-            get; 
-            set; 
-        } 
+            get;
+            set;
+        } = string.Empty;
          
            
         /// <summary>
         /// MemberId
         /// </summary>
-        public virtual int? MemberId
+        public virtual int MemberId
         {
             get; 
             set; 
-        } 
-         
-           
+        }
+
+
         /// <summary>
         /// CookieTag
         /// </summary>
         public virtual string CookieTag
         {
-            get; 
-            set; 
-        } 
+            get;
+            set;
+        } = string.Empty;
          
            
         /// <summary>
         /// TotPrice
         /// </summary>
-        public virtual decimal? TotPrice
+        public virtual decimal TotPrice
         {
             get; 
             set; 
@@ -80,7 +80,7 @@ namespace SmartShop.Core.Entities{
         /// <summary>
         /// Price
         /// </summary>
-        public virtual decimal? Price
+        public virtual decimal Price
         {
             get; 
             set; 
@@ -90,7 +90,7 @@ namespace SmartShop.Core.Entities{
         /// <summary>
         /// ProductNum
         /// </summary>
-        public virtual int? ProductNum
+        public virtual int ProductNum
         {
             get; 
             set; 
@@ -110,7 +110,7 @@ namespace SmartShop.Core.Entities{
         /// <summary>
         /// Status
         /// </summary>
-        public virtual int? Status
+        public virtual int Status
         {
             get; 
             set; 

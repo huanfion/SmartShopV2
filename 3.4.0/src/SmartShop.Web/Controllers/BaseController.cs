@@ -8,9 +8,9 @@ using System.Web.Routing;
 
 namespace SmartShop.Web.Controllers
 {
-    public class BaseController : Controller 
+    public class BaseController : Controller
     {
-       protected  Assets assets {get;set;}
+        protected Assets assets { get; set; }
 
 
 
@@ -23,24 +23,23 @@ namespace SmartShop.Web.Controllers
             string memberPhoneStr = Common.CookieHelper.GetCookie("_memphone");
 
             assets = new Assets();
-            if (!string.IsNullOrEmpty(memberCartStr))
+            if (string.IsNullOrEmpty(memberCartStr))
             {
                 memberCartStr = Common.Encrypt.MD5(DateTime.Now.Ticks.ToString());
-                Common.CookieHelper.SetCookie("_memcart", memberCartStr,72);
+                Common.CookieHelper.SetCookie("_memcart", memberCartStr, 72);
             }
             assets.CookieTag = memberCartStr;
-            if (!string.IsNullOrEmpty(memberIdStr))
+
+            int.TryParse(Common.Encrypt.Decode(memberIdStr, "smartshop"), out int adminid);
+            if (adminid > 0)
             {
-                int.TryParse(Common.Encrypt.Decode(memberIdStr, "smartshop"),out int adminid);
-                if (adminid > 0)
+                assets.MemberId = adminid;
+                if (!string.IsNullOrEmpty(memberPhoneStr))
                 {
-                    assets.MemberId = adminid;
-                    if (!string.IsNullOrEmpty(memberPhoneStr))
-                    {
-                        assets.MemberPhone = Common.Encrypt.Decode(memberPhoneStr, "smartshop");
-                    }
+                    assets.MemberPhone = Common.Encrypt.Decode(memberPhoneStr, "smartshop");
                 }
             }
+
         }
     }
 }

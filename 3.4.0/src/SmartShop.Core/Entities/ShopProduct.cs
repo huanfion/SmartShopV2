@@ -8,7 +8,7 @@ namespace SmartShop.Core.Entities{
         /// <summary>
         /// CompanyId
         /// </summary>
-        public virtual int? CompanyId
+        public virtual int CompanyId
         {
             get; 
             set; 
@@ -158,7 +158,7 @@ namespace SmartShop.Core.Entities{
         /// <summary>
         /// OrigPrice
         /// </summary>
-        public virtual decimal? OrigPrice
+        public virtual decimal OrigPrice
         {
             get; 
             set; 
@@ -168,7 +168,7 @@ namespace SmartShop.Core.Entities{
         /// <summary>
         /// Price
         /// </summary>
-        public virtual decimal? Price
+        public virtual decimal Price
         {
             get; 
             set; 
@@ -178,7 +178,7 @@ namespace SmartShop.Core.Entities{
         /// <summary>
         /// Quantity
         /// </summary>
-        public virtual int? Quantity
+        public virtual int Quantity
         {
             get; 
             set; 
@@ -188,7 +188,7 @@ namespace SmartShop.Core.Entities{
         /// <summary>
         /// Sales
         /// </summary>
-        public virtual int? Sales
+        public virtual int Sales
         {
             get; 
             set; 
@@ -198,7 +198,7 @@ namespace SmartShop.Core.Entities{
         /// <summary>
         /// IsRecommend
         /// </summary>
-        public virtual int? IsRecommend
+        public virtual int IsRecommend
         {
             get; 
             set; 
@@ -208,7 +208,7 @@ namespace SmartShop.Core.Entities{
         /// <summary>
         /// IsHot
         /// </summary>
-        public virtual int? IsHot
+        public virtual int IsHot
         {
             get; 
             set; 
@@ -218,7 +218,7 @@ namespace SmartShop.Core.Entities{
         /// <summary>
         /// IsTop
         /// </summary>
-        public virtual int? IsTop
+        public virtual int IsTop
         {
             get; 
             set; 
@@ -258,7 +258,7 @@ namespace SmartShop.Core.Entities{
         /// <summary>
         /// IsRemove
         /// </summary>
-        public virtual int? IsRemove
+        public virtual int IsRemove
         {
             get; 
             set; 
@@ -268,7 +268,7 @@ namespace SmartShop.Core.Entities{
         /// <summary>
         /// IsActivity
         /// </summary>
-        public virtual int? IsActivity
+        public virtual int IsActivity
         {
             get; 
             set; 
@@ -278,7 +278,7 @@ namespace SmartShop.Core.Entities{
         /// <summary>
         /// Status
         /// </summary>
-        public virtual int? Status
+        public virtual int Status
         {
             get; 
             set; 

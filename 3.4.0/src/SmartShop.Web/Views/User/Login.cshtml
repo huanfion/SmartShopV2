@@ -72,10 +72,11 @@
                 $("#sendCode").addClass("active");
                 if (validSecond > 0) { return false; }
                 var phone = $("#Phone").val();
-                var reg = '/^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$';
+                var reg = /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
                 if (!reg.test(phone)) {
                     webToast("请输入正确的手机号码");
                 }
+                validSecond = 60;
                 validTime = setInterval(function () {
                     validSecond--;
                     SendCode.text("(" + validSecond + "s)后重新获取");
@@ -89,7 +90,8 @@
                 $.ajax({
                     type: "GET",
                     url: "/user/getsignincode",
-                    data: "phone", phone,
+                    data: { "phone": phone },
+                    dataType: "json",
                     success: function (data) {
                         if (data.Code == 0) {
                             webToast("验证码已经发送");
@@ -102,6 +104,65 @@
                     }
                 })
 
+            }
+        });
+
+        jQuery.validator.addMethod("isPhone", function (value, element) {
+            var length = value.length;
+            var mobile = /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+            var tel = /^\d{3,4}-?\d{7,9}$/;
+            return this.optional(element) || (tel.test(value) || mobile.test(value));
+
+        }, "请填写正确的手机号码");
+
+        jQuery("form").validate({
+            highlight: function (element) {
+                jQuery(element).addClass('has-error');
+            },
+            success: function (element) {
+                jQuery(element).removeClass('has-error');
+            },
+            rules: {
+                Phone: {
+                    required: true,
+                    isPhone: true,
+                    digits: true
+                },
+                Code: {
+                    required: true
+                }
+            },
+            messages: {
+                Phone: {
+                    required: "手机号码不能为空.",
+                    isPhone: "请填写正确的手机号码.",
+                    digits: "请填写手机号"
+                },
+                Code: {
+                    required: "请输入验证码"
+                }
+            },
+            submitHandler: function (form) {
+                var param = $('form').serialize();
+                $.ajax({
+                    url: '/User/CheckIdentity',
+                    type: 'post',
+                    dataType: 'json',
+                    data: param,
+                    success: function (result) {
+                        if (result.Code == 1) {
+                            var callUrl = $('#callbackUrl').val();
+                            if (callUrl == '') {
+                                callUrl = '/User/Index';
+                            }
+                            location.href = callUrl;
+                        }
+                        else {
+                            webToast(result.Message);
+                        }
+                    }
+                });
+                return false;
             }
         });
     });

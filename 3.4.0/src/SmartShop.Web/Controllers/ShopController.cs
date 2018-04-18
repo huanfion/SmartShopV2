@@ -77,10 +77,32 @@ namespace SmartShop.Web.Controllers
             if (cart == null)
             {
                 //添加新品到购物车
+                ShopCart newcart = new ShopCart();
+                newcart.CookieTag = assets.CookieTag;
+                newcart.MemberId = assets.MemberId;
+                newcart.CreateTime = DateTime.Now;
+                newcart.Price = product.Price;
+                newcart.TotPrice=product.Price * sum;
+                newcart.ProductNum = sum;
+                newcart.ProductPic = product.Cover;
+                int cartid=_shopcartservice.InsertCart(newcart);
             }
             else
             {
                 //更新购物车
+                cart.ProductNum += sum;
+                cart.Price += product.Price;
+                cart.TotPrice = cart.ProductNum * cart.Price;
+                _shopcartservice.UpdateCart(cart);
+            }
+
+            if (assets.MemberId > 0)
+            {
+                count = _shopcartservice.GetCountByMemberId(assets.MemberId);
+            }
+            else
+            {
+                count = _shopcartservice.GetCartCountByCookie(assets.CookieTag);
             }
             //查找购物车数量
             return Json(count, JsonRequestBehavior.AllowGet);
