@@ -1,4 +1,5 @@
 ﻿using SmartShop.Core.Entities;
+using SmartShop.Entities;
 using SmartShop.ShopCartApp;
 using SmartShop.ShopProductApp;
 using System;
@@ -106,6 +107,26 @@ namespace SmartShop.Web.Controllers
             }
             //查找购物车数量
             return Json(count, JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// 更新购物车
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="num"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult UpdateCart(int id,int num)
+        {
+            ResultMessage result = new ResultMessage();
+            var cart = _shopcartservice.GetCartById(id);
+            if (cart != null)
+            {
+                cart.ProductNum = num;
+                _shopcartservice.UpdateCart(cart);
+                result.Code = 1;
+                result.Message = "更新购物车成功";
+            }
+            return Json(result,JsonRequestBehavior.AllowGet);
         }
     }
 }

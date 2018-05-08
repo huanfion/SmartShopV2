@@ -746,9 +746,7 @@
     <Compile Include="App_Start\SmartShopNavigationProvider.cs" />
     <Compile Include="App_Start\SmartShopWebModule.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Models\BaseModel.cs" />
@@ -789,6 +787,7 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Shared\_ShopLayout.cshtml" />
+    <Content Include="Views\User\cart.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

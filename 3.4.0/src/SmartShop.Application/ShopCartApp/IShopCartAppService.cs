@@ -68,5 +68,11 @@ namespace SmartShop.ShopCartApp
         /// <param name="id"></param>
         /// <returns></returns>
         List<ShopCart> GetCartListByTag(string tag);
+        /// <summary>
+        /// 根据id查询购物车
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        ShopCart GetCartById(int id);
     }
 }

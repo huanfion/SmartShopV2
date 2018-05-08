@@ -21,16 +21,25 @@ namespace SmartShop.ShopCartApp
         /// <returns></returns>
         public int GetCountByMemberId(int MemberId)
         {
-            return _shopcartRepository.Count(s=>s.MemberId== MemberId);
+            return _shopcartRepository.GetAllList(s=>s.MemberId== MemberId).Sum(a=>a.ProductNum);
         }
         /// <summary>
-        /// 获取当前cookie标识的购物车数量
+        /// 获取当前cookie标识的购物车商品数量
         /// </summary>
         /// <param name="tag"></param>
         /// <returns></returns>
         public int GetCartCountByCookie(string tag)
         {
-            return string.IsNullOrWhiteSpace(tag)?0: _shopcartRepository.Count(s => s.CookieTag== tag);
+            return string.IsNullOrWhiteSpace(tag) ? 0 : _shopcartRepository.GetAllList(s => s.CookieTag == tag).Sum(a => a.ProductNum);
+        }
+        /// <summary>
+        /// 根据id查询购物车
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ShopCart GetCartById(int id)
+        {
+            return _shopcartRepository.Get(id);
         }
         /// <summary>
         /// 获取指定购物车中指定的商品

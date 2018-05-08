@@ -1,0 +1,84 @@
+﻿@model List<SmartShop.Core.Entities.ShopCart>
+@{
+    ViewBag.Title = "cart";
+    Layout = "~/Views/Shared/_ShopLayout.cshtml";
+}
+
+<div class="header">
+    <h3>我的购物车</h3>
+</div>
+@if (Model.Count == 0)
+{
+    <p style="padding:1.5rem 0.1rem 7rem; color:#630; text-align:center;">亲，您的购物车是空的。</p>
+}
+else
+{
+    <div class="cartList">
+        @foreach (var item in Model)
+        {
+            <div class="cartitem" data-price="@item.Price" data-pid="@item.Id">
+                <div class="item-content">
+                    <div class="itemselect"><span class="select"></span></div>
+                    <div class="itemcover"><img src="@item.ProductPic" /></div>
+                    <div class="itemaction">
+                        <div class="itemname">@item.ProductName</div>
+                        <div class="itemorder">
+                            <div class="itemprice">￥<span>@item.Price</span></div>
+                            <div class="itemsum">
+                                <span class="minus">-</span>
+                                <span class="sum">@item.ProductNum</span>
+                                <span class="plus">+</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="itemremove">
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+<div style="height:0.5rem;"></div>
+<div class="footer">
+    <div class="copyright"><span></span></div>
+</div>
+<div style="height:2rem;"></div>
+<div class="cartbar">
+    <div class="all"><span></span>全选</div>
+    <div class="toorder">去结算</div>
+    <div class="intro">合计：￥<span></span>元</div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            getcart();
+            $(document).on("click", ".itemsum>span", function () {
+                $num = $(this).parent().find(".sum");
+                var count = parseInt($num.text());
+                var v = $(this).text();
+                if (v == "-") {
+                    if (count > 1) {
+                        count--;
+                    }
+                    else { return; }
+                }
+                else if (v == "+") {
+                    count++;
+                }
+                $num = $num.text(count);
+                var pid = parseInt($(this).parents(".cartitem").data("pid"));
+                $.post("/shop/UpdateCart", { id: pid, num: count }, function (data) {
+                    var el = $('.navmenu i');
+                    var elnum = parseInt(el.text());
+                    if (data.Code > 0) {
+                        el.text(v == "-" ? elnum - 1 : elnum + 1);
+                        el.show();
+                    } else {
+                        el.hide();
+                    }
+                });
+            });
+        });
+    </script>
+}

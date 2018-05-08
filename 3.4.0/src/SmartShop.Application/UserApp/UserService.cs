@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SmartShop.UserApp
 {
-    public class UserService:IUserService
+    public class UserService: SmartShopAppServiceBase,IUserService
     {
         private readonly IRepository<HTUser> _userRepository;
         public UserService(IRepository<HTUser> userRepository)
