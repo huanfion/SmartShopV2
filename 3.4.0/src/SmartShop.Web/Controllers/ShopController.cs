@@ -75,7 +75,7 @@ namespace SmartShop.Web.Controllers
                 cart = _shopcartservice.GetCartByProductId(assets.CookieTag, productId);
             }
 
-            if (cart == null)
+            if (cart != null)
             {
                 //添加新品到购物车
                 ShopCart newcart = new ShopCart();
@@ -86,6 +86,7 @@ namespace SmartShop.Web.Controllers
                 newcart.TotPrice=product.Price * sum;
                 newcart.ProductNum = sum;
                 newcart.ProductPic = product.Cover;
+                newcart.ProductId = product.Id;
                 int cartid=_shopcartservice.InsertCart(newcart);
             }
             else
@@ -127,6 +128,25 @@ namespace SmartShop.Web.Controllers
                 result.Message = "更新购物车成功";
             }
             return Json(result,JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 删除购物车
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult RemoveCart(int id)
+        {
+            ResultMessage result = new ResultMessage();
+            var cart = _shopcartservice.GetCartById(id);
+            if (cart != null)
+            {
+                _shopcartservice.RemoveCart(id);
+                result.Code = 1;
+                result.Message = "删除购物车成功";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

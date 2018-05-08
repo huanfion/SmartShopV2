@@ -108,5 +108,14 @@ namespace SmartShop.ShopCartApp
         {
              _shopcartRepository.Update(cart);
         }
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public void RemoveCart(int id)
+        {
+            _shopcartRepository.Delete(id);
+        }
     }
 }

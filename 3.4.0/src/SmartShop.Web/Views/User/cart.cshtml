@@ -48,10 +48,53 @@ else
     <div class="toorder">去结算</div>
     <div class="intro">合计：￥<span></span>元</div>
 </div>
-
+@section Styles{
+    <link href="~/css/alertPopShow.css" rel="stylesheet" />
+}
 @section Scripts{
+    <script src="~/Scripts/alertPopShow.js"></script>
     <script type="text/javascript">
+        var ids = new Array();
+        function calculate() {
+            ids = new Array();
+            var totalPrice = 0.00;
+            var total = 0;
+            var el = $('.cartitem');
+            var l = 0;
+            el.each(function () {
+                var sEl = $(this).find('.itemselect span');
+                //console.log('v', sEl.hasClass('select'));
+                if (sEl.hasClass('select')) {
+                    var price = parseFloat($(this).data('price'));
+                    var sum = parseInt($(this).find('.sum').text());
+
+                    totalPrice += price * sum;
+                    total += sum;
+
+                    ids.push($(this).data('pid'));
+
+                    l++;
+                }
+            });
+
+            if (el.length == l) {
+                $('.all').addClass('select');
+            }
+            else {
+                $('.all').removeClass('select');
+            }
+
+            if (total > 0) {
+                $('.intro span').text(totalPrice.toFixed(2));
+                $('.toorder').removeClass('disabled').text('去结算 (' + total + ')');
+            }
+            else {
+                $('.intro span').text('0');
+                $('.toorder').addClass('disabled').text('去结算');
+            }
+        }
         $(document).ready(function () {
+            calculate();
             getcart();
             $(document).on("click", ".itemsum>span", function () {
                 $num = $(this).parent().find(".sum");
@@ -77,7 +120,37 @@ else
                     } else {
                         el.hide();
                     }
+                    calculate();
+                    getcart();
                 });
+            });
+
+            $(document).on("click", ".itemremove", function () {
+                var curItem = $(this).parents(".cartitem");
+                var id = curItem.data("pid");
+                popTipShow.confirm('删除提示', '您确定要从购物车中删除当前商品？', ['确 定', '取 消'],
+                    function (e) {
+                        var button = $(e.target).attr('class');
+                        if (button == "ok") {
+                            $.post("/shop/RemoveCart", { id: id }, function (result) {
+                                var el = $('.navmenu i');
+                                if (result.Code > 0) {
+
+                                    curItem.remove();
+
+                                    //calculate();
+                                    getcart();
+                                }
+                                else {
+                                    el.hide();
+                                }
+                            },"json");
+                        }
+                        else {
+
+                        }
+                        this.hide();
+                    });
             });
         });
     </script>

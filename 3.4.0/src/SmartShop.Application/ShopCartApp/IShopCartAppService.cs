@@ -74,5 +74,10 @@ namespace SmartShop.ShopCartApp
         /// <param name="id"></param>
         /// <returns></returns>
         ShopCart GetCartById(int id);
+        /// <summary>
+        /// 删除cart
+        /// </summary>
+        /// <param name="id"></param>
+        void RemoveCart(int id);
     }
 }
